@@ -3,33 +3,39 @@
 <h2>Edit Action</h2>
 
 <form id="editForm" method="post">
-    <input type="hidden" name="ID" value="@Model.ID" />
-    <br/>
 
-    <label>Title</label>
-    <input name="Title" value="@Model.Title" />
+    <div class="form-group">
+        <input type="hidden" class="form-control" name="ID" value="@Model.ID" />
+    </div>
+    <div class="form-group">
+        <label>Title</label>
+        <input class="form-control" name="Title" value="@Model.Title" />
+    </div>
+    <div class="form-group">
+        <label>PictureURL</label>
+        <input class="form-control" name="PictureURL" value="@Model.PictureURL" />
+    </div>
 
+    <div class="form-group">
+        <label>Description</label>
+        <input class="form-control" name="Description" value="@Model.Description" />
+    </div>
+    <div class="form-group">
+        <label>ActualAmount</label>
+        <input class="form-control" name="ActualAmount" value="@Model.ActualAmount" />
+    </div>
 
-    <br />
-    <label>PictureURL</label>
-    <input name="PictureURL" value="@Model.PictureURL" />
+    <div class="form-group">
+        <label>StartingTime</label>
+        <input class="form-control" name="StartingTime" value="@Model.StartingTime" />
+    </div>
+    <div class="form-group">
+        <label>EndingTime</label>
+        <input class="form-control" name="EndingTime" value="@Model.EndingTime" />
+    </div>
 
-    <br />
-    <label>Description</label>
-    <input name="Description" value="@Model.Description" />
-
-    <br />
-    <label>ActualAmount</label>
-    <input name="ActualAmount" value="@Model.ActualAmount" />
-    <br />
-    <label>StartingTime</label>
-    <input name="StartingTime" value="@Model.StartingTime" />
-    <br />
-    <label>EndingTime</label>
-    <input name="EndingTime" value="@Model.EndingTime" />
-    <br />
-
-    <button type="button" id="saveButton">
+  
+    <button class="btn btn-success" type="button" id="saveButton">
         Save
     </button>
 
