@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DealDouble.Services;
+using DealDouble.Web.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,16 @@ namespace DealDouble.Web.Controllers
 {
     public class HomeController : Controller
     {
+        AuctionsService service = new AuctionsService();
         public ActionResult Index()
         {
-            return View();
+            AuctionsViewModel vModel = new AuctionsViewModel();
+            vModel.PageTitle = "Home Page";
+            vModel.PageDescriptions = "This is Home Page";
+            vModel.AllAuctions = service.GetAllAuctions();
+            vModel.PromotedAuctions = service.GetPromotedAuctions();
+            
+            return View(vModel);
         }
 
         public ActionResult About()

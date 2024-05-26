@@ -38,7 +38,7 @@
 <script>
     $("#saveButton").click(function () {
         $.ajax({
-            url: "Create/",
+            url: "Auctions/Create/",
             method: "post",
             data: $("#createForm").serialize()
         }).done(function (response) {

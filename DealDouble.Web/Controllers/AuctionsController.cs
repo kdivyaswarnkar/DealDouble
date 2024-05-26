@@ -77,7 +77,14 @@ namespace DealDouble.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Details(int ID)
+        {
+            AuctionsService service = new AuctionsService();
+            var auction = service.GetAuctionByID(ID);
 
+            return View(auction);
+        }
 
     }
 }

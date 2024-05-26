@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model DealDouble.Web.ViewModels.PageViewModel
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -8,15 +10,16 @@
     <meta name="description" content="">
 
 
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@Model.PageTitle - Deal Double</title>
+    <meta name="description" content="@Model.PageDescriptions" />
 
     <!-- Bootstrap core CSS -->
-    <link href="Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="Content/css/shop-homepage.css" rel="stylesheet">
+    <link href="~/Content/css/shop-homepage.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
-    <script src="Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body>
@@ -62,7 +65,7 @@
         <!-- /.container -->
     </footer>
     <!-- Bootstrap core JavaScript -->
-    <script src="Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
