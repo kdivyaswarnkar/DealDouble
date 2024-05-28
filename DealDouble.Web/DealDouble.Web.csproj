@@ -259,8 +259,8 @@
     <Content Include="Views\Auctions\Create.cshtml" />
     <Content Include="Views\Auctions\Edit.cshtml" />
     <Content Include="Views\Auctions\Index.cshtml" />
-    <Content Include="Views\Auctions\Delete.cshtml" />
     <Content Include="Views\Auctions\Details.cshtml" />
+    <Content Include="Views\Auctions\Listing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

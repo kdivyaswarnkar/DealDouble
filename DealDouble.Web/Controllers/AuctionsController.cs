@@ -1,5 +1,6 @@
 ﻿using DealDouble.Entities;
 using DealDouble.Services;
+using DealDouble.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +11,33 @@ namespace DealDouble.Web.Controllers
 {
     public class AuctionsController : Controller
     {
+        AuctionsService service = new AuctionsService();
+
+
 
         [HttpGet]
         public ActionResult Index()
         {
-            AuctionsService service = new AuctionsService();
-            var auctions = service.GetAllAuctions();
-            if(Request.IsAjaxRequest())
-            {
-                return PartialView(auctions);
-            }
-            else
-            {
-                return View(auctions);
-            }
+            AuctionsListingViewModel model = new AuctionsListingViewModel();
+
+            model.PageTitle = "Auctions";
+            model.PageDescriptions = "Auction Listing Page";
+
+            model.Auctions = service.GetAllAuctions();
+           
+            return View(model);
+            
+        }
+
+
+        public ActionResult Listing()
+        {
+            AuctionsListingViewModel model= new AuctionsListingViewModel();
+
+            model.Auctions = service.GetAllAuctions();
+
+            return PartialView(model);
+            
          
         }
 
@@ -35,17 +49,15 @@ namespace DealDouble.Web.Controllers
 
         [HttpPost]
         public ActionResult Create(Auction auction)
-        {
-            AuctionsService service = new AuctionsService();
+        {           
             service.SaveAuction(auction);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Listing");
         }
 
         [HttpGet]
         public ActionResult Edit(int ID)
-        {
-            AuctionsService service = new AuctionsService();
+        {   
             var auction = service.GetAuctionByID(ID);
 
             return PartialView(auction);
@@ -54,33 +66,23 @@ namespace DealDouble.Web.Controllers
         [HttpPost]
         public ActionResult Edit(Auction auction)
         {
-            AuctionsService service = new AuctionsService();
             service.UpdateAuction(auction);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Listing");
         }
 
-        [HttpGet]
-        public ActionResult Delete(int ID)
-        {
-            AuctionsService service = new AuctionsService();
-            var auction = service.GetAuctionByID(ID);
-
-            return View(auction);
-        }
         [HttpPost]
         public ActionResult Delete(Auction auction)
-        {
-            AuctionsService service = new AuctionsService();
+        {         
             service.DeleteAuction(auction);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Listing");
         }
 
         [HttpGet]
         public ActionResult Details(int ID)
         {
-            AuctionsService service = new AuctionsService();
+           
             var auction = service.GetAuctionByID(ID);
 
             return View(auction);
