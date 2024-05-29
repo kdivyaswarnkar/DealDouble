@@ -13,8 +13,6 @@ namespace DealDouble.Web.Controllers
     {
         AuctionsService service = new AuctionsService();
 
-
-
         [HttpGet]
         public ActionResult Index()
         {
@@ -48,8 +46,26 @@ namespace DealDouble.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Auction auction)
-        {           
+        public ActionResult Create(CreateAuctionViewModel model)
+        {
+            Auction auction = new Auction();
+            auction.Title = model.Title;
+            auction.Description = model.Description;
+            auction.ActualAmount = model.ActualAmount;
+            auction.StartingTime = model.StartingTime;
+            auction.EndingTime = model.EndingTime;
+            var pictureIDs = model.AuctionPictures.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ID => int.Parse(ID)).ToList();
+            auction.AuctionPictures = new List<AuctionPicture>();
+
+            auction.AuctionPictures.AddRange(pictureIDs.Select(x => new AuctionPicture() { PictureID = x }).ToList());
+
+            //foreach (var picID in pictureIDs)
+            //{
+            //    var auctionPicture = new AuctionPicture();
+            //    auctionPicture.PictureID = picID;
+            //    auction.AuctionPictures.Add(auctionPicture);
+            //}
+            
             service.SaveAuction(auction);
 
             return RedirectToAction("Listing");

@@ -18,4 +18,14 @@ namespace DealDouble.Web.ViewModels
 
     }
 
+    public class CreateAuctionViewModel : PageViewModel
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public decimal ActualAmount { get; set; }
+        public DateTime StartingTime { get; set; }
+        public DateTime EndingTime { get; set; }
+
+        public string AuctionPictures { get; set; }
+    }
 }
