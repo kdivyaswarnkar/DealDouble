@@ -12,7 +12,7 @@
 
         <div class="form-group">
             <label>Title</label>
-            <input class="form-control" name="Title" value="@Model.Title" />
+            <input class="form-control" name="Title" value="@Model.Title" required minlength="12" maxlength="100" />
         </div>
 
         <div class="form-group">
@@ -68,35 +68,57 @@
 </form>
 
 
+
 <script>
+
+    //$("#createForm").validate({
+    //    rules: {
+    //        Title: {
+    //            require: true,
+    //            minlegth: 15,
+    //            maxlength:150
+    //        }
+    //    },
+    //    messages: {
+    //        Title: {
+    //            required: "Title is Required",
+    //            minlegth: "Minimum length is 15",
+    //            maxlength:"Maximum length is 150"
+    //        }
+
+    //    }
+    //});
+
     $("#saveButton").click(function () {
-        var imageIDs = [];
+        if ($("#createForm").valid()) {
+            var imageIDs = [];
 
-        $("#picturesArea .image").each(function () {
-            var imageID = $(this).attr("data-id");
+            $("#picturesArea .image").each(function () {
+                var imageID = $(this).attr("data-id");
 
-            imageIDs.push(imageID);
+                imageIDs.push(imageID);
+            });
+
+            $("#pictureIDs").val(imageIDs.join());
+
+            $.ajax({
+                url: "@Url.Action("Create","Auctions")",
+                method: "post",
+                data: $("#createForm").serialize()
+            }).done(function (response) {
+
+                if (response.Success) {
+                    ReloadListing();
+                    //  $("#listingArea").html(response);
+                    $('#formModal').modal('toggle');
+                }
+                else {
+                    $('#formErrors').html(response.Error);
+                    $('#formErrors').show();
+                }
+            });
+        }
         });
-
-        $("#pictureIDs").val(imageIDs.join());
-
-        $.ajax({
-            url: "@Url.Action("Create","Auctions")",
-            method: "post",
-            data: $("#createForm").serialize()
-        }).done(function (response) {
-          
-            if (response.Success) {
-                ReloadListing();
-              //  $("#listingArea").html(response);
-                $('#formModal').modal('toggle');
-            }
-            else {
-                $('#formErrors').html(response.Error);
-                $('#formErrors').show();
-            }       
-        });
-    });
 
     $("#auctionPictures").change(function () {
         var pictures = this.files;
