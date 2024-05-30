@@ -61,12 +61,17 @@ namespace DealDouble.Web.Controllers
             auction.ActualAmount = model.ActualAmount;
             auction.StartingTime = model.StartingTime;
             auction.EndingTime = model.EndingTime;
-            
-            var pictureIDs = model.AuctionPictures.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ID => int.Parse(ID)).ToList();
-            auction.AuctionPictures = new List<AuctionPicture>();
 
-            auction.AuctionPictures.AddRange(pictureIDs.Select(x => new AuctionPicture() { PictureID = x }).ToList());
 
+            if (!string.IsNullOrEmpty(model.AuctionPictures))
+            {
+
+
+                var pictureIDs = model.AuctionPictures.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ID => int.Parse(ID)).ToList();
+                auction.AuctionPictures = new List<AuctionPicture>();
+
+                auction.AuctionPictures.AddRange(pictureIDs.Select(x => new AuctionPicture() { PictureID = x }).ToList());
+            }
             //foreach (var picID in pictureIDs)
             //{
             //    var auctionPicture = new AuctionPicture();
@@ -81,15 +86,43 @@ namespace DealDouble.Web.Controllers
 
         [HttpGet]
         public ActionResult Edit(int ID)
-        {   
+        {
+
+            CreateAuctionViewModel model = new CreateAuctionViewModel();
+
             var auction = auctionService.GetAuctionByID(ID);
 
-            return PartialView(auction);
+            model.ID = auction.ID;
+            model.Title = auction.Title;
+            model.CategoryID = auction.CategoryID;
+            model.Description = auction.Description;
+            model.ActualAmount = auction.ActualAmount;
+            model.StartingTime = auction.StartingTime;
+            model.EndingTime = auction.EndingTime;
+            model.Categories = categoriesService.GetAllCategories();
+            model.AuctionPictureList = auction.AuctionPictures;
+            
+            return PartialView(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(Auction auction)
+        public ActionResult Edit(CreateAuctionViewModel model)
         {
+            Auction auction = new Auction();
+            auction.ID = model.ID;
+            auction.Title = model.Title;
+            auction.CategoryID = model.CategoryID;
+            auction.Description = model.Description;
+            auction.ActualAmount = model.ActualAmount;
+            auction.StartingTime = model.StartingTime;
+            auction.EndingTime = model.EndingTime;
+
+            if (!string.IsNullOrEmpty(model.AuctionPictures))
+            {           
+            var pictureIDs = model.AuctionPictures.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ID => int.Parse(ID)).ToList();
+            auction.AuctionPictures = new List<AuctionPicture>();
+            auction.AuctionPictures.AddRange(pictureIDs.Select(x => new AuctionPicture() {AuctionID=auction.ID, PictureID = x }).ToList());
+            }
             auctionService.UpdateAuction(auction);
 
             return RedirectToAction("Listing");

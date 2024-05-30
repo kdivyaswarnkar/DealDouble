@@ -44,7 +44,7 @@
 
 
 <div id="imageTemplate" style="display:none">
-    <img class='image img-fluid' src='' />
+    <img class=' image img-thumbnail' src='' style="width:200px;height:200px;" />
 </div>
 
 <script>
@@ -72,10 +72,20 @@
             });        
     });
 
+    function AttachNewImage(imageURL, imageID) {
+
+        var $newimageHTML = $("#imageTemplate").clone();
+
+        $newimageHTML.find(".image").attr("src", "/Content/images/" + imageURL);
+
+        $newimageHTML.find(".image").attr("data-id", imageID);
+
+        $("#picturesArea").append($newimageHTML.html());
+        RemoveImagesOnClick();
+    }
+
     function RemoveImagesOnClick() {
         $("#picturesArea .image").click(function () {
-            debugger;
-
             $(this).remove();
         });
     }
