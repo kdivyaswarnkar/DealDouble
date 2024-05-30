@@ -33,13 +33,18 @@
 
 <script>
     $(".editButton").click(function () {
+        debugger;
         $.ajax({
+            
             url: "@Url.Action("Edit","Auctions")",
+            
             method: "get",
             data: {
+                
                 ID: $(this).attr("data-id")
             }
         }).done(function (response) {
+            debugger;
             $("#contentArea").html(response);
            // $('#formModal').modal('toggle');
         });

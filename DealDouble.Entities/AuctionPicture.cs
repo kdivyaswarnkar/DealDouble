@@ -11,6 +11,6 @@ namespace DealDouble.Entities
         public int AuctionID { get; set; }
         public int PictureID { get; set; }
 
-        public Picture Picture { get; set; }
+        public virtual Picture Picture { get; set; }
     }
 }

@@ -105,12 +105,16 @@ namespace DealDouble.Web.Controllers
 
         [HttpGet]
         public ActionResult Details(int ID)
-        {
-           
-            var auction = auctionService.GetAuctionByID(ID);
+        {           
+            AuctionsDetailsViewModel model = new AuctionsDetailsViewModel();
+            model.Auction = auctionService.GetAuctionByID(ID);
+            model.PageTitle = "Auction Details:" + model.Auction.Title;
+            model.PageDescriptions = model.Auction.Description.Substring(0,10);
 
-            return View(auction);
+            return View(model);
         }
+
+
 
     }
 }
