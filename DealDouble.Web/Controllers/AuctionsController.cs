@@ -28,7 +28,6 @@ namespace DealDouble.Web.Controllers
             
         }
 
-
         public ActionResult Listing()
         {
             AuctionsListingViewModel model= new AuctionsListingViewModel();
