@@ -12,39 +12,39 @@
 
         <div class="form-group">
             <label>Title</label>
-            <input class="form-control" name="Title" />
+            <input class="form-control" name="Title" value="@Model.Title" />
         </div>
 
         <div class="form-group">
             <label>Category</label>
             <select class="form-control" name="CategoryID">
-               @foreach (var category in Model.Categories)
-               {
-                <option value="@category.ID">
-                    @category.Name
-                </option>
-               }
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.ID">
+                        @category.Name
+                    </option>
+                }
             </select>
         </div>
 
         <div class="form-group">
             <label>Description</label>
-            <input class="form-control" name="Description" />
+            <input class="form-control" name="Description" value="@Model.Description" />
         </div>
 
         <div class="form-group">
             <label>ActualAmount</label>
-            <input class="form-control" name="ActualAmount" />
+            <input class="form-control" name="ActualAmount" value="@Model.ActualAmount" />
         </div>
 
         <div class="form-group">
             <label>StartingTime</label>
-            <input class="form-control" name="StartingTime" />
+            <input class="form-control" name="StartingTime" value="@Model.StartingTime" />
         </div>
 
         <div class="form-group">
             <label>EndingTime</label>
-            <input class="form-control" name="EndingTime" />
+            <input class="form-control" name="EndingTime" value="@Model.EndingTime" />
         </div>
 
         <div class="form-group">
@@ -52,9 +52,10 @@
             <input id="auctionPictures" class="form-control" name="AuctionPictures" type="file" multiple />
 
             <div id="picturesArea" class="mt-2"> </div>
-                <input type="hidden" name="AuctionPictures" id="pictureIDs" />
-           
-
+            <input type="hidden" name="AuctionPictures" id="pictureIDs" />
+        </div>
+        <div id="formErrors" class="form-group bg-danger" style="display:none">
+                
         </div>
     </div>
 
@@ -84,8 +85,16 @@
             method: "post",
             data: $("#createForm").serialize()
         }).done(function (response) {
-            $("#listingArea").html(response);
-            $('#formModal').modal('toggle');
+          
+            if (response.Success) {
+                ReloadListing();
+              //  $("#listingArea").html(response);
+                $('#formModal').modal('toggle');
+            }
+            else {
+                $('#formErrors').html(response.Error);
+                $('#formErrors').show();
+            }       
         });
     });
 
