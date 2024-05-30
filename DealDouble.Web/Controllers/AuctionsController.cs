@@ -14,7 +14,7 @@ namespace DealDouble.Web.Controllers
         AuctionsService auctionService = new AuctionsService();
         CategoriesService categoriesService = new CategoriesService();
 
-        [HttpGet]
+       
         public ActionResult Index(int? categoryID, string searchTerm,int? pageNo)
         {
             AuctionsListingViewModel model = new AuctionsListingViewModel();
@@ -26,19 +26,20 @@ namespace DealDouble.Web.Controllers
             model.CategoryID = categoryID;
             model.SearchTerm = searchTerm;
             model.PageNo = pageNo;
+            model.Categories = categoriesService.GetAllCategories();
             return View(model);
             
         }
 
         public ActionResult Listing(int? categoryID,string searchTerm, int? pageNo)
         {
-            var pageSize = 1;
+            var pageSize = 5;
             AuctionsListingViewModel model= new AuctionsListingViewModel();
 
          // model.Auctions = auctionService.GetAllAuctions();
             model.Auctions = auctionService.SearchAuctions(categoryID,searchTerm,pageNo,pageSize);
 
-            var totalAuctions = auctionService.GetAuctionCount();
+            var totalAuctions = auctionService.GetAuctionCount(categoryID, searchTerm);
             model.Pager = new Pager(totalAuctions,pageNo,pageSize);
             
          // pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;

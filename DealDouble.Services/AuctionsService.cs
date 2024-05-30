@@ -76,20 +76,20 @@ namespace DealDouble.Services
 
 
         }
-        public int GetAuctionCount()
+        public int GetAuctionCount(int? categoryID, string searchTerm)
         {
             DealDoubleContext context = new DealDoubleContext();
-
-            return context.Auctions.Count();
-            //if (!string.IsNullOrEmpty(search))
-            //    {
-            //        return context.Categories.Where(category => category.Name != null &&
-            //             category.Name.ToLower().Contains(search.ToLower())).Count();
-            //    }
-            //    else
-            //    {
-            //        return context.Categories.Count();
-            //    }
+            var auctions = context.Auctions.AsQueryable();
+            if (categoryID.HasValue && categoryID.Value > 0)
+            {
+                auctions = auctions.Where(x => x.CategoryID == categoryID.Value);
+            }
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                auctions = auctions.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower()));
+            }
+            return auctions.Count();
+           
             
         }
     }
