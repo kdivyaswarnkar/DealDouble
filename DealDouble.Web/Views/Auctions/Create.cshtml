@@ -71,23 +71,35 @@
 
 <script>
 
-    //$("#createForm").validate({
-    //    rules: {
-    //        Title: {
-    //            require: true,
-    //            minlegth: 15,
-    //            maxlength:150
-    //        }
-    //    },
-    //    messages: {
-    //        Title: {
-    //            required: "Title is Required",
-    //            minlegth: "Minimum length is 15",
-    //            maxlength:"Maximum length is 150"
-    //        }
-
-    //    }
+    //$('input[name="StartingTime"]').daterangepicker({
+    //    singleDatePicker: true,
+    //    showDropdowns: true,
+    //    minYear: 1901,
+    //    maxYear: parseInt(moment().format('YYYY'), 10)
     //});
+
+
+    $("#createForm").validate({
+        rules: {
+            Title: {
+                require: true,
+                minlegth: 15,
+                maxlength:150
+            }
+        },
+        messages: {
+            Title: {
+                required: "Title is Required",
+                minlegth: "Minimum length is 15",
+                maxlength:"Maximum length is 150"
+            }
+
+        }
+    });
+
+
+  
+
 
     $("#saveButton").click(function () {
         if ($("#createForm").valid()) {

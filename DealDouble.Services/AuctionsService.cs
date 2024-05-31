@@ -41,8 +41,10 @@ namespace DealDouble.Services
         public void UpdateAuction(Auction auction)
         {
             DealDoubleContext context = new DealDoubleContext();
-
-            context.Entry(auction).State = System.Data.Entity.EntityState.Modified;
+            var existingAuction = context.Auctions.Find(auction.ID);
+            context.AuctionPictures.RemoveRange(existingAuction.AuctionPictures);
+            context.Entry(existingAuction).CurrentValues.SetValues(auction);
+            context.AuctionPictures.AddRange(auction.AuctionPictures);
             context.SaveChanges();
         }
 
