@@ -33,7 +33,7 @@ namespace DealDouble.Web.Controllers
 
         public ActionResult Listing(int? categoryID,string searchTerm, int? pageNo)
         {
-            var pageSize = 5;
+            var pageSize = 1;
             AuctionsListingViewModel model= new AuctionsListingViewModel();
 
          // model.Auctions = auctionService.GetAllAuctions();

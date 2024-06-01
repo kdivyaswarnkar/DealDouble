@@ -55,18 +55,17 @@
             <input type="hidden" name="AuctionPictures" id="pictureIDs" />
         </div>
         <div id="formErrors" class="form-group bg-danger" style="display:none">
-                
+
         </div>
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button class="btn btn-success" type="button" id="saveButton">
             Save
         </button>
     </div>
 </form>
-
 
 
 <script>
@@ -79,26 +78,26 @@
     //});
 
 
-    $("#createForm").validate({
-        rules: {
-            Title: {
-                require: true,
-                minlegth: 15,
-                maxlength:150
-            }
-        },
-        messages: {
-            Title: {
-                required: "Title is Required",
-                minlegth: "Minimum length is 15",
-                maxlength:"Maximum length is 150"
-            }
+    //$("#createForm").validate({
+    //    rules: {
+    //        Title: {
+    //            require: true,
+    //            minlegth: 15,
+    //            maxlength:150
+    //        }
+    //    },
+    //    messages: {
+    //        Title: {
+    //            required: "Title is Required",
+    //            minlegth: "Minimum length is 15",
+    //            maxlength:"Maximum length is 150"
+    //        }
 
-        }
-    });
+    //    }
+    //});
 
 
-  
+
 
 
     $("#saveButton").click(function () {
@@ -147,15 +146,15 @@
             processData: false,
             contentType: false
         }).done(function (response) {
-            
+
             for (var i = 0; i < response.length; i++) {
                 var picResponse = response[i];
-               
+
                 AttachNewImage(picResponse.pictureURL, picResponse.ID);
             }
         });
     });
 
 
-   
+
 </script>
