@@ -12,9 +12,7 @@ namespace DealDouble.Web.Controllers
     public class AuctionsController : Controller
     {
         AuctionsService auctionService = new AuctionsService();
-        CategoriesService categoriesService = new CategoriesService();
-
-       
+        CategoriesService categoriesService = new CategoriesService();      
         public ActionResult Index(int? categoryID, string searchTerm,int? pageNo)
         {
             AuctionsListingViewModel model = new AuctionsListingViewModel();
@@ -161,6 +159,10 @@ namespace DealDouble.Web.Controllers
         {           
             AuctionsDetailsViewModel model = new AuctionsDetailsViewModel();
             model.Auction = auctionService.GetAuctionByID(ID);
+            model.BidsAmount = model.Auction.ActualAmount + model.Auction.Bids.Sum(x => x.BidAmount);
+            var latestBidder = model.Auction.Bids.OrderByDescending(x => x.TimeStamp).FirstOrDefault();
+            model.LatestBidder = latestBidder !=null?latestBidder.User :null;
+            //model.Auction = auctionService.GetAuctionByID(ID);
             model.PageTitle = "Auction Details:" + model.Auction.Title;
             model.PageDescriptions = model.Auction.Description.Substring(0,10);
 

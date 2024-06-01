@@ -1,6 +1,6 @@
 ﻿@model DealDouble.Web.ViewModels.AuctionsDetailsViewModel
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <div class="row">
 
     <div class="col-lg-12">
@@ -44,10 +44,22 @@
             }
             <div class="card-body">
                 <h3 class="card-title">@Model.Auction.Title</h3>
-                <h4>@Model.Auction.ActualAmount</h4>
+                <h4>
+                $@Model.BidsAmount 
+
+                    @if(Model.LatestBidder !=null)
+                 {
+               <text>
+                    [@Model.LatestBidder.UserName]
+               </text>
+                 }
+               </h4>
                 <p class="card-text">@Model.Auction.Description</p>
                 <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                 4.0 stars
+            </div>
+            <div class="card-footer text-muted">
+                <button type="button" class="btn btn-primary" id="btnBidNow">Bid Now</button>
             </div>
         </div>
         <!-- /.card -->
@@ -75,3 +87,26 @@
     <!-- /.col-lg-9 -->
 
 </div>
+
+<script>
+    $("#btnBidNow").click(function () {
+         $.ajax({
+             url: "@Url.Action("Bid","Bids")",
+             type: "post",
+             data: {
+                 ID: '@Model.Auction.ID'
+            }
+         }).done(function (response) {
+             debugger;
+             if (response.Success) {
+                 window.location.reload();
+             }
+             else {
+                 swal("Error!", response.Message, "error");
+             }
+         }).fail(function () {
+             swal("Error!", "Error Occured. Please try againn leter", "error");
+
+         });
+    })
+</script>

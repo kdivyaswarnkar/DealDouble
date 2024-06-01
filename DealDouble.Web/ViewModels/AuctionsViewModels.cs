@@ -10,6 +10,9 @@ namespace DealDouble.Web.ViewModels
     public class AuctionsDetailsViewModel : PageViewModel
     {
        public Auction Auction { get; set; }
+        public decimal BidsAmount { get; set; }
+        public DealDoubleUser LatestBidder { get; set; }
+      
     }
 
     public class AuctionsListingViewModel : PageViewModel
