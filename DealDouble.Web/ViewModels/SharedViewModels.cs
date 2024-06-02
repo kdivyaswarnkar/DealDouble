@@ -5,8 +5,12 @@ using System.Web;
 
 namespace DealDouble.Web.ViewModels
 {
-    public class SharedViewModels
+    public class CommentViewModel
     {
+        public string Text { get; set; }
+        public int EntityID { get; set; }
+        public int RecordID { get; set; }
+
     }
     //public class Pager
     //{

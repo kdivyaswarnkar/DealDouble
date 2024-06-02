@@ -12,7 +12,8 @@ namespace DealDouble.Web.ViewModels
        public Auction Auction { get; set; }
         public decimal BidsAmount { get; set; }
         public DealDoubleUser LatestBidder { get; set; }
-      
+        public List<Comment> Comments { get; internal set; }
+        public int EntityID { get; internal set; }
     }
 
     public class AuctionsListingViewModel : PageViewModel

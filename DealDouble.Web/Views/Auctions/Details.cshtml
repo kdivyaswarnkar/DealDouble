@@ -14,8 +14,8 @@
                 <div id="carouselIndicators" class="carousel slide my-4" data-ride="carousel">
                     <ol class="carousel-indicators">
                         @foreach (var picture in Model.Auction.AuctionPictures)
-                                {
-                             var active=picture== firstAuctionPicture ? "active" : string.Empty;
+                        {
+                            var active = picture == firstAuctionPicture ? "active" : string.Empty;
                             <li class="@active" data-target="#carouselIndicators" data-slide-to="@i"></li>
                             i++;
                         }
@@ -45,15 +45,15 @@
             <div class="card-body">
                 <h3 class="card-title">@Model.Auction.Title</h3>
                 <h4>
-                $@Model.BidsAmount 
+                    $@Model.BidsAmount
 
-                    @if(Model.LatestBidder !=null)
-                 {
-               <text>
-                    [@Model.LatestBidder.UserName]
-               </text>
-                 }
-               </h4>
+                    @if (Model.LatestBidder != null)
+                    {
+                        <text>
+                            [@Model.LatestBidder.UserName]
+                        </text>
+                    }
+                </h4>
                 <p class="card-text">@Model.Auction.Description</p>
                 <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                 4.0 stars
@@ -66,19 +66,35 @@
 
         <div class="card card-outline-secondary my-4">
             <div class="card-header">
-                Product Reviews
+                Comments
             </div>
             <div class="card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                <hr>
-                <a href="#" class="btn btn-success">Leave a Review</a>
+
+                @if (Model.Comments != null && Model.Comments.Count > 0)
+                {
+                    foreach (var comment in Model.Comments)
+                    {
+                        <p>@comment.Text</p>
+                        <small class="text-muted">Posted by @comment.UserID on @comment.TimeStamp</small>
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <b>There are no comments on this Auction.</b>
+                    <hr />
+                }
+
+                
+                <form id="commentForm">
+                    <input type="hidden" name="EntityID" value="@Model.EntityID" />
+                    <input type="hidden" name="RecordID" value="@Model.Auction.ID" />
+                    <div class="form-group">
+                        <label>Write Your Comment</label>
+                        <textarea class="form-control" rows="3" name="Text" placeholder="write your comments here"></textarea>
+                    </div>
+                    <button class="btn btn-success" id="btnComment" type="button">Leave a Comment</button>
+                </form>
             </div>
         </div>
         <!-- /.card -->
@@ -97,7 +113,30 @@
                  ID: '@Model.Auction.ID'
             }
          }).done(function (response) {
-             debugger;
+
+             if (response.Success) {
+                 window.location.reload();
+             }
+             else {
+                 swal("Error!", response.Message, "error");
+             }
+         }).fail(function () {
+             swal("Error!", "Error Occured. Please try againn leter", "error");
+
+         });
+    })
+
+
+
+    $("#btnComment").click(function () {
+      
+         $.ajax({
+             url: "@Url.Action("LeaveComment", "Shared")",
+             type: "post",
+             data: $("#commentForm").serialize()
+
+         }).done(function (response) {
+           
              if (response.Success) {
                  window.location.reload();
              }
