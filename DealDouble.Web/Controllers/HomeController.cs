@@ -1,9 +1,5 @@
 ﻿using DealDouble.Services;
 using DealDouble.Web.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DealDouble.Web.Controllers
@@ -17,6 +13,10 @@ namespace DealDouble.Web.Controllers
             vModel.PageTitle = "Home Page";
             vModel.PageDescriptions = "This is Home Page";
             vModel.AllAuctions = service.GetAllAuctions();
+
+            //vModel.AllAuctions = new List<Entities.Auction>();
+            //vModel.AllAuctions.AddRange(auctions);
+
             vModel.PromotedAuctions = service.GetPromotedAuctions();
             
             return View(vModel);

@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DealDoubleContext.cs" />
+    <Compile Include="DealDoubleDBIntializer.cs" />
     <Compile Include="Migrations\202405240548132_auctionEntityAdded.cs" />
     <Compile Include="Migrations\202405240548132_auctionEntityAdded.designer.cs">
       <DependentUpon>202405240548132_auctionEntityAdded.cs</DependentUpon>
