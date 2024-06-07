@@ -5,10 +5,11 @@
         <tr>
             <th>Title</th>
             <th>Category</th>
-            <th>Description</th>
+            <th>Summary</th>
+          @*  <th>Description</th>*@
             <th>Actual Amount</th>
-            <th>Starting Time</th>
-            <th>Ending Time</th>
+          @*  <th>Starting Time</th>*@
+          @*  <th>Ending Time</th>*@
             <th>Actions</th>
         </tr>
     </thead>
@@ -20,10 +21,11 @@
                 <tr>
                     <td>@auction.Title</td>
                     <td>@auction.Category.Name</td>
-                    <td>@auction.Description</td>
+                    <td>@auction.Summary</td>
+                  @*  <td>@auction.Description</td>*@
                     <td>@auction.ActualAmount</td>
-                    <td>@auction.StartingTime</td>
-                    <td>@auction.EndingTime</td>
+                   @* <td>@auction.StartingTime</td>*@
+                  @*  <td>@auction.EndingTime</td>*@
                     <td>
                         <button class="editButton btn btn-primary" data-id="@auction.ID" data-toggle="modal" data-target="#formModal">Edit</button>
                         <button class="deleteButton btn btn-danger" data-id="@auction.ID" data-toggle="modal" data-target="#deleteModal">Delete</button>

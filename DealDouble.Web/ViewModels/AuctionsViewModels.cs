@@ -20,6 +20,7 @@ namespace DealDouble.Web.ViewModels
     {
         public List<Auction> Auctions { get; set; }
         public string SearchTerm { get; set; }
+        public string Summary { get; set; }
         public Pager Pager { get; set; }
         public int? CategoryID { get; set; }
         public int? PageNo { get; set; }
@@ -39,6 +40,7 @@ namespace DealDouble.Web.ViewModels
         [MinLength(15, ErrorMessage = "Minimum length should be 15 characters..")]
         [MaxLength(150)]
         public string Title { get; set; }
+        public string Summary { get; set; }
         public string Description { get; set; }
         [Required]
         [Range(100, 10000000, ErrorMessage = "Actual Amount must be within 100-10000000.")]

@@ -99,6 +99,10 @@
     <Compile Include="Migrations\202406030114326_ratingstart.designer.cs">
       <DependentUpon>202406030114326_ratingstart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202406070229352_addedsummary.cs" />
+    <Compile Include="Migrations\202406070229352_addedsummary.designer.cs">
+      <DependentUpon>202406070229352_addedsummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -142,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202406030114326_ratingstart.resx">
       <DependentUpon>202406030114326_ratingstart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202406070229352_addedsummary.resx">
+      <DependentUpon>202406070229352_addedsummary.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -32,7 +32,7 @@ namespace DealDouble.Web.Controllers
 
         public ActionResult Listing(int? categoryID,string searchTerm, int? pageNo)
         {
-            var pageSize = 1;
+            var pageSize = 3;
             AuctionsListingViewModel model= new AuctionsListingViewModel();
 
          // model.Auctions = auctionService.GetAllAuctions();
@@ -68,6 +68,7 @@ namespace DealDouble.Web.Controllers
 
                 auction.Title = model.Title;
                 auction.CategoryID = model.CategoryID;
+                auction.Summary = model.Summary;
                 auction.Description = model.Description;
                 auction.ActualAmount = model.ActualAmount;
                 auction.StartingTime = model.StartingTime;
@@ -114,6 +115,7 @@ namespace DealDouble.Web.Controllers
             model.ID = auction.ID;
             model.Title = auction.Title;
             model.CategoryID = auction.CategoryID;
+            model.Summary = auction.Summary;
             model.Description = auction.Description;
             model.ActualAmount = auction.ActualAmount;
             model.StartingTime = auction.StartingTime;
@@ -131,6 +133,7 @@ namespace DealDouble.Web.Controllers
             auction.ID = model.ID;
             auction.Title = model.Title;
             auction.CategoryID = model.CategoryID;
+            auction.Summary = model.Summary;
             auction.Description = model.Description;
             auction.ActualAmount = model.ActualAmount;
             auction.StartingTime = model.StartingTime;

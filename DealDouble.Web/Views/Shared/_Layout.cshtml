@@ -29,19 +29,15 @@
 
 <body>
 
-   @{Html.RenderPartial("_TopMenu");}
+    @{Html.RenderPartial("_TopMenu");}
 
     <div class="container">
         @RenderBody()
     </div>
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
-        </div>
-        <!-- /.container -->
-    </footer>
+    @{Html.RenderPartial("_Footer");}
+  
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

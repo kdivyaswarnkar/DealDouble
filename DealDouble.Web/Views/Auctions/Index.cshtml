@@ -4,83 +4,90 @@
     var categoryID = Model.CategoryID.HasValue ? Model.CategoryID.Value : 0;
 }
 
-<div class="row">
-    <div class="col-lg-12 m-2">
-        <div class="float-left">
-            <h2>Auctions</h2>
-            <form method="post">
-                <div class="form-row align-items-center">
-                    <div class="col-auto my-1">
-                        <select class="custom-select mr-sm-2" name="categoryID">
-                            <option selected>Select Category...</option>
-                            @foreach (var category in Model.Categories)
-                            {
-                                var select = category.ID == categoryID ? "selected" : string.Empty;
-                                <option value="@category.ID">@category.Name</option>
-                            }
 
-                        </select>
-                    </div>
-                    <div class="col-auto my-1">
-                        <div class="custom-control custom-checkbox mr-sm-2">
-                            <input name="searchTerm" type="text" value="@Model.SearchTerm" class="form-control" placeholder="Serach" />
-                        </div>
-                    </div>
-                    <div class="col-auto my-1">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="float-right">
-            <button class="btn btn-info" id="createButton">Create New Auction</button>
-        </div>
-        <div id="listingArea">
-            @{Html.RenderAction("Listing", new { categoryID = Model.CategoryID, searchTerm = Model.SearchTerm });}
+<div class="row mt-2">
+    <div class="col-lg-12 col-md-12">
+        <h2>Auctions</h2>
+        <hr />
+    </div>
+    <div class="col-md-10">
+        <form method="post">
+            <div class="input-group" mb-3>
+                <input name="searchTerm" type="text" value="@Model.SearchTerm" class="form-control" placeholder="Serach" />
 
-        </div>
+                <select class="form-control custom-select" name="categoryID">
+                    <option selected>Select Category...</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        var selected = category.ID == categoryID ? "selected" : string.Empty;
 
-        <!-- Modal -->
-        <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content" id="contentArea">
-                </div>
+
+
+                        <option value="@category.ID" @selected>@category.Name</option>
+                    }
+
+                </select>
+
+                <button type="submit" class="form-control btn btn-primary">
+                    <i class="fas fa-search"></i>Search
+                </button>
+                
+                    <a href="@Url.Action("Index","Auctions")" role="button" class="form-control btn btn-primary"><i class="fa-sharp fa-solid fa-rotate-right"></i>Reset</a>
+               
+                <button type="button" class="form-control btn btn-success" id="createButton"><i class="fas fa-plus"></i>Create New Auction</button>
+
             </div>
-        </div>
+            <input type="hidden" name="page" value="1" />
+            <input type="hidden" name="items" value="10" />
+        </form>
+    </div>
+    <div class="col-lg-12" id="listingArea">
+        @{Html.RenderAction("Listing", new { categoryID = Model.CategoryID, searchTerm = Model.SearchTerm });}
 
-        <!-- Modal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this record ?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" id="mDeleteButton">Delete</button>
-                    </div>
-                </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="contentArea">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this record ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="mDeleteButton">Delete</button>
             </div>
         </div>
     </div>
 </div>
 
 
-
 <div id="imageTemplate" style="display:none">
     <img class=' image img-thumbnail' src='' style="width:200px;height:200px;" />
 </div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js">
 </script>
 
 @*<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />*@
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />*@
 
 
 

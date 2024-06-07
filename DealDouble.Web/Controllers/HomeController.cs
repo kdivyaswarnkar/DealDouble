@@ -13,7 +13,13 @@ namespace DealDouble.Web.Controllers
             vModel.PageTitle = "Home Page";
             vModel.PageDescriptions = "This is Home Page";
             vModel.AllAuctions = service.GetAllAuctions();
-
+            var auctions = service.GetAllAuctions();
+            vModel.AllAuctions.AddRange(auctions);
+            vModel.AllAuctions.AddRange(auctions);
+            vModel.AllAuctions.AddRange(auctions);
+            vModel.AllAuctions.AddRange(auctions); 
+            vModel.AllAuctions.AddRange(auctions);
+            vModel.AllAuctions.AddRange(auctions);
             //vModel.AllAuctions = new List<Entities.Auction>();
             //vModel.AllAuctions.AddRange(auctions);
 
