@@ -1,6 +1,7 @@
 ﻿@model DealDouble.Web.ViewModels.AuctionsListingViewModel
 
 @{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
     var categoryID = Model.CategoryID.HasValue ? Model.CategoryID.Value : 0;
 }
 
@@ -31,9 +32,9 @@
                 <button type="submit" class="form-control btn btn-primary">
                     <i class="fas fa-search"></i>Search
                 </button>
-                
-                    <a href="@Url.Action("Index","Auctions")" role="button" class="form-control btn btn-primary"><i class="fa-sharp fa-solid fa-rotate-right"></i>Reset</a>
-               
+
+                <a href="@Url.Action("Index","Auctions")" role="button" class="form-control btn btn-primary"><i class="fa-sharp fa-solid fa-rotate-right"></i>Reset</a>
+
                 <button type="button" class="form-control btn btn-success" id="createButton"><i class="fas fa-plus"></i>Create New Auction</button>
 
             </div>
@@ -82,14 +83,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js">
-</script>
-
-@*<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />*@
-
-
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 
 <script>
     $("#createButton").click(function () {
