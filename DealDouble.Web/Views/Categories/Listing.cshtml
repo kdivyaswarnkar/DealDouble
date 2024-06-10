@@ -19,8 +19,8 @@
                 <td>@category.Description</td>
                 <td>@category.Auctions.Count()</td>
                 <td>
-                    <button class="editButton btn btn-primary" data-id="@category.ID" data-toggle="modal" data-target="#formModal">Edit</button>
-                    <button class="deleteButton btn btn-danger" data-id="@category.ID" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                    <button class="editButton btn btn-primary" data-id="@category.ID" data-toggle="modal" data-target="#formModal"> <i class="fas fa-edit mr-1"></i>Edit</button>
+                    <button class="deleteButton btn btn-danger" data-id="@category.ID" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt mr-1"></i>Delete</button>
                 </td>
             </tr>
         }

@@ -1,34 +1,33 @@
-﻿@model DealDouble.Web.ViewModels.AuctionsListingViewModel
+﻿@model DealDouble.Web.ViewModels.UsersListingViewModel
 
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Summary</th>
-            <th>Actual Amount</th>
-            <th>Bids</th>
+            <th>Name</th>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Roles</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @if (Model.Auctions != null && Model.Auctions.Count > 0)
+        @if (Model.Users != null && Model.Users.Count > 0)
         {
-            foreach (var auction in Model.Auctions)
+            foreach (var user in Model.Users)
             {
                 <tr>
-                    <td>@auction.Title</td>
-                    <td>@auction.Category.Name</td>
-                    <td>@auction.Summary</td>
-                
-                    <td>@auction.ActualAmount</td>
-                    <td>@auction.Bids</td>
-                 
                     <td>
-                        <button class="editButton btn btn-primary" data-id="@auction.ID" data-toggle="modal" data-target="#formModal">
-                            <i class="fas fa-edit"></i>Edit</button>
-                        <button class="deleteButton btn btn-danger" data-id="@auction.ID" data-toggle="modal" data-target="#deleteModal">
-                        <i class="fas fa-trash-alt"></i>Delete</button>
+                        <input type="hidden" value="@user.Id" />
+                    @user.FullName
+                    </td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Roles.Count</td>
+                    <td>
+                        <button class="moreButton btn btn-primary" data-id="@user.Id">
+                        <i class="fas fa-edit"></i>
+                        More Details
+                        </button>
                     </td>
                 </tr>
             }
@@ -58,7 +57,7 @@
             else
             {
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Index","auctions", new { pageNo=Model.Pager.CurrentPage-1,categoryID=Model.CategoryID,searchTerm=Model.SearchTerm})" tabindex="-1">Previous</a>
+                    <a class="page-link" href="@Url.Action("Users","Dashboard", new { pageNo=Model.Pager.CurrentPage-1,roleID=Model.RoleID,searchTerm=Model.SearchTerm})" tabindex="-1">Previous</a>
                 </li>
             }
 
@@ -66,7 +65,7 @@
             {
                 var active = page == Model.Pager.CurrentPage ? "active" : string.Empty;
                 <li class="page-item @active">
-                    <a class="page-link" href="@Url.Action("Index","Auctions",new { pageNo=page})">@page</a>
+                    <a class="page-link" href="@Url.Action("Users","Dashboard",new { pageNo=page,roleID=Model.RoleID,searchTerm=Model.SearchTerm})">@page</a>
                 </li>
             }
 
@@ -80,7 +79,7 @@
             else
             {
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Index","Auctions",new {pageNo=Model.Pager.CurrentPage+1, categoryID=Model.CategoryID,searchTerm=Model.SearchTerm})">Next</a>
+                    <a class="page-link" href="@Url.Action("Users","Dashboard",new {pageNo=Model.Pager.CurrentPage+1, roleID=Model.RoleID,searchTerm=Model.SearchTerm})">Next</a>
                 </li>
             }
 
@@ -89,9 +88,9 @@
 
 }
 @section Scripts{
-<script>
-    $(".editButton").click(function () {
-        $.ajax({
+    <script>
+    $(".moreButton").click(function () {
+        @*$.ajax({
             url: "@Url.Action("Edit","Auctions")",
             method: "get",
             data: {
@@ -100,16 +99,10 @@
         }).done(function (response) {
             $("#contentArea").html(response);
            // $('#formModal').modal('toggle');
-        });
+        });*@
     });
 
 
-    $(".deleteButton").click(function () {
-        $('#deleteModal').modal('toggle');
-        $('#mDeleteButton').attr("data-recordID", $(this).attr("data-id"));
-
-    });
-
-</script>
+    </script>
 }
 

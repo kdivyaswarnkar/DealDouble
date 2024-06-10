@@ -1,0 +1,273 @@
+﻿@*@using DealDouble.Web.Code.Enums;*@
+@model DealDouble.Web.ViewModels.PageViewModel
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dashboard</title>
+
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/dashboard.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading bold">
+                <i class="mr-1 fas fa-check-double"></i>
+                Deal Double
+            </div>
+        </div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="@Url.Action("Index","Home")">
+                <i class="mr-1 fas fa-home"></i>Home
+            </a>
+            @*<a data-page="@((int)Pages.Dashboard)" class="list-group-item list-group-item-action active" href="@Url.Action("Index","Dashboard")">
+                    <i class="fas fa-user-shield"></i>
+                    Dashboard
+                </a>*@
+            <a class="list-group-item list-group-item-action active" href="@Url.Action("Index","Dashboard")">
+                <i class="fas fa-user-shield"></i>
+                Dashboard
+            </a>
+            @*<a data-page="@((int)Pages.Categories)" class="list-group-item list-group-item-action active" href="@Url.Action("Index","Categories")">
+                    <i class="fas fa-user-shield"></i>
+                    Categories
+                </a>*@
+            <a class="list-group-item list-group-item-action active" href="@Url.Action("Index","Categories")">
+                <i class="fas fa-user-sitemap"></i>
+                Categories
+            </a>
+            @*<a data-page="@((int)Pages.Auctions)" class="list-group-item list-group-item-action active" href="@Url.Action("Index","Auctions")">
+                    <i class="mr-1 fab fa-shirtsinbulk"></i>
+                    Auctions
+                </a>*@
+            <a class="list-group-item list-group-item-action active" href="@Url.Action("Index","Auctions")">
+                <i class="mr-1 fab fa-shirtsinbulk"></i>
+                Auctions
+            </a>
+            @*<a data-page="@((int)Pages.Bids)" class="list-group-item list-group-item-action active" href="@Url.Action("Index","Bids")">
+                    <i class="mr-1 fab fa-business-time"></i>
+                    Bids
+                </a>*@
+            <a class="list-group-item list-group-item-action active" href="@Url.Action("Index","Bids")">
+                <i class="mr-1 fab fa-business-time"></i>
+                Bids
+            </a>
+        </div>
+        @*<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+                <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Deal Double</a>
+                <input class="form-control form-control-dark w-100 bg-dark" value="Hi @User.Identity.Name" disabled>
+                <ul class="navbar-nav px-3">
+                    <li class="nav-item text-nowrap">
+                        <a class="nav-link" id="btnLogOff" href="#">LogOff</a>
+                    </li>
+                </ul>
+            </nav>*@
+
+        @*<div class="container-fluid">
+                <div class="row">
+                    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                        <div class="sidebar-sticky">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="@Url.Action("Index","Dashboard")">
+                                        <span data-feather="home"></span>
+                                        Dashboard <span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","Categories")">
+                                        <span data-feather="file"></span>
+                                        Categories
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","Auctions")">
+                                        <span data-feather="file"></span>
+                                        Auctions
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index","Bids")">
+                                        <span data-feather="file"></span>
+                                        Bids
+                                    </a>
+                                </li>
+
+
+                            </ul>
+
+                            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                                <span>Users Menu</span>
+                                <a class="d-flex align-items-center text-muted" href="#">
+                                    <span data-feather="plus-circle"></span>
+                                </a>
+                            </h6>
+                            <ul class="nav flex-column mb-2">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Users","Dashboard")">
+                                        <span data-feather="file-text"></span>
+                                        Users
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Roles","Dashboard")">
+                                        <span data-feather="file-text"></span>
+                                        Roles
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <main role="main" class="mt-4 col-md-9 ml-sm-auto col-lg-10 px-4">
+
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>*@
+    </div>
+    @RenderBody()
+    <form id="logOffForm" method="post" action="@Url.Action("LogOff","Account")">
+        @Html.AntiForgeryToken()
+    </form>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $("#btnLogOff").click(function () {
+            $("#logOffForm").submit();
+        })
+    </script>
+
+    @*@RenderSection("Scripts", required: false)*@
+</body>
+
+
+
+
+<body>
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="bg-light border-right" id="sidebar-wrapper">
+                <div class="sidebar-heading bold">
+                    <i class="mr-1 fas fa-check-double"></i>
+                    Deal Double
+                </div>
+            </div>
+
+            <div class="list-group list-group-flush">
+
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index","Home")">
+                    <i class="mr-1 fas fa-home"></i>Home
+                </a>
+
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index","Dashboard")">
+                    <i class="fas fa-user-shield"></i>
+                    Dashboard
+                </a>
+
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index","Categories")">
+                    <i class="mr-1 fas fa-sitemap"></i>
+                    Categories
+                </a>
+
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index","Auctions")">
+                    <i class="mr-1 fab fa-shirtsinbulk"></i>
+                    Auctions
+                </a>
+                <a class="list-group-item list-group-item-action list-group-item-light" href="@Url.Action("Index","Bids")">
+                    <i class="mr-1 fab fa-business-time"></i>
+                    Bids
+                </a>
+                <a class="list-group-item list-group-item-action list-group-item-light" href="@Url.Action("Index","Bids")">
+                    <i class="fa-solid fa-comments"></i>
+                    Comments
+                </a>
+                <a class="list-group-item list-group-item-action list-group-item-light" href="@Url.Action("Index","Bids")">
+                    <i class="mr-1 fa-solid fa-users"></i>
+                    Users
+                </a>
+                <a class="list-group-item list-group-item-action list-group-item-light" href="@Url.Action("Index","Bids")">
+                    <i class="mr-1 fa-solid fa-users-gear"></i>
+                    Roles
+                </a>
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#!">Action</a>
+                                    <a class="dropdown-item" href="#!">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#!">Something else here</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Page content-->
+            <div class="container-fluid">
+                <h1 class="mt-4">Simple Sidebar</h1>
+                <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+                <p>
+                    Make sure to keep all page content within the
+                    <code>#page-content-wrapper</code>
+                    . The top navbar is optional, and just for demonstration. Just create an element with the
+                    <code>#sidebarToggle</code>
+                    ID which will toggle the menu when clicked.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  @*  @RenderBody()*@
+    <form id="logOffForm" method="post" action="@Url.Action("LogOff","Account")">
+        @Html.AntiForgeryToken()
+    </form>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $("#btnLogOff").click(function () {
+            $("#logOffForm").submit();
+        })
+    </script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+</html>
+
+
+
