@@ -301,6 +301,7 @@
     <Content Include="Views\Dashboard\Users.cshtml" />
     <Content Include="Views\Dashboard\UsersListing.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
+    <Content Include="Views\Dashboard\UserDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

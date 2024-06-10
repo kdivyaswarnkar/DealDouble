@@ -4,6 +4,7 @@ using DealDouble.Web.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -105,6 +106,21 @@ namespace DealDouble.Web.Controllers
 
             model.Pager = new Pager(users.Count(), pageNo, pageSize);
             return PartialView(model);
+        }
+
+
+        public async Task<ActionResult> UserDetails(string userID)
+        {
+           
+            UserDetailsViewModel model = new UserDetailsViewModel();
+            var user =await UserManager.FindByIdAsync(userID);
+
+            if(user != null)
+            {
+                model.User = user;
+            }
+
+            return View(model);
         }
 
 

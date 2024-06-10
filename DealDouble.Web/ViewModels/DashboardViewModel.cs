@@ -23,13 +23,18 @@ namespace DealDouble.Web.ViewModels
 
     public class UsersListingViewModel : PageViewModel
     {
-        internal string searchTerm;
-
         public List<DealDoubleUser> Users { get; internal set; }
         public Pager Pager { get; set; }
         public string RoleID { get; internal set; }
         public string SearchTerm { get; internal set; }
     }
+
+    public class UserDetailsViewModel : PageViewModel
+    {
+
+        public  DealDoubleUser User { get; set; }
+    }
+
     public class RolesListingViewModel : PageViewModel
     {
         internal string searchTerm;
